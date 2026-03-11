@@ -29,3 +29,4 @@ SELECT CD_CLASSE, NM_CLASSE FROM TESTE_CLASSE;
 - .NET 10 (Minimal APIs)
 - Dapper
 - Oracle.ManagedDataAccess
+- Scalar `/scalar/v1`
