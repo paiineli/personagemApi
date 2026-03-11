@@ -24,11 +24,16 @@ namespace PersonagemApi.Endpoints
                 }
             });
 
-            grupoPersonagem.MapGet("/buscarcomfiltro", async (int? cdPersonagem, int? cdClasse, string? nmPersonagem, IPersonagemREP personagemREP) =>
+            // query string só aceita texto, converti manualmente para int? tratando o caso em que o parâmetro não foi enviado (string vazia ou nula).
+            grupoPersonagem.MapGet("/buscarcomfiltro", async (string? cdPersonagem, string? cdClasse, string? nmPersonagem, IPersonagemREP personagemREP) =>
             {
                 try
                 {
-                    var result = await personagemREP.BuscarPersonagensComFiltrosAsync(cdPersonagem, cdClasse, nmPersonagem);
+                    var result = await personagemREP.BuscarPersonagensComFiltrosAsync(
+                        int.TryParse(cdPersonagem, out var personagem) ? personagem : null,
+                        int.TryParse(cdClasse, out var classe) ? classe : null,
+                        nmPersonagem);
+
                     return Results.Ok(result);
                 }
                 catch (Exception ex)
@@ -67,7 +72,7 @@ namespace PersonagemApi.Endpoints
                     if (linhasAfetadas == 0)
                     {
                         return Results.NotFound("Personagem não encontrado.");
-                    }                        
+                    }
 
                     return Results.Ok("Personagem atualizado com sucesso.");
                 }

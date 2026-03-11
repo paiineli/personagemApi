@@ -8,18 +8,19 @@ namespace PersonagemApi.Repositories
     {
         #region buscar
 
+        // coloquei alias pq o dapper espera o construtor pelo nome do parâmetro, sem o alias, o dapper não consegue acessar por causa do underscore
         public async Task<List<PersonagemDTO>> BuscarTodosPersonagensAsync()
         {
             try
             {
                 using var connection = conexaoBanco.CreateConnection();
 
-                var query = @"SELECT X.CD_PERSONAGEM,
-                                            X.CD_CLASSE,
-                                            X.NM_PERSONAGEM,
-                                            X.NR_NIVEL,
-                                            X.DT_CADASTRO,
-                                            Z.NM_CLASSE
+                var query = @"SELECT X.CD_PERSONAGEM CdPersonagem,
+                                            X.CD_CLASSE CdClasse,
+                                            X.NM_PERSONAGEM NmPersonagem,
+                                            X.NR_NIVEL NrNivel,
+                                            X.DT_CADASTRO DtCadastro,
+                                            Z.NM_CLASSE NmClasse
                                         FROM TESTE_PERSONAGEM X, TESTE_CLASSE Z
                                         WHERE 1 = 1
                                         AND X.CD_CLASSE = Z.CD_CLASSE";
@@ -35,6 +36,7 @@ namespace PersonagemApi.Repositories
             }
         }
 
+        // coloquei alias pq o dapper espera o construtor pelo nome do parâmetro, sem o alias, o dapper não consegue acessar por causa do underscore
         public async Task<List<PersonagemDTO>> BuscarPersonagensComFiltrosAsync(int? cdPersonagem, int? cdClasse, string? nmPersonagem)
         {
             try
@@ -43,12 +45,12 @@ namespace PersonagemApi.Repositories
 
                 var parametros = new DynamicParameters();
 
-                var query = @"SELECT X.CD_PERSONAGEM,
-                                            X.CD_CLASSE,
-                                            X.NM_PERSONAGEM,
-                                            X.NR_NIVEL,
-                                            X.DT_CADASTRO,
-                                            Z.NM_CLASSE
+                var query = @"SELECT X.CD_PERSONAGEM CdPersonagem,
+                                            X.CD_CLASSE CdClasse,
+                                            X.NM_PERSONAGEM NmPersonagem,
+                                            X.NR_NIVEL NrNivel,
+                                            X.DT_CADASTRO DtCadastro,
+                                            Z.NM_CLASSE NmClasse
                                         FROM TESTE_PERSONAGEM X, TESTE_CLASSE Z
                                         WHERE 1 = 1
                                         AND X.CD_CLASSE = Z.CD_CLASSE";
