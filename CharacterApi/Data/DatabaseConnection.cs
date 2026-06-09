@@ -1,15 +1,15 @@
-﻿using Oracle.ManagedDataAccess.Client;
+using Oracle.ManagedDataAccess.Client;
 using System.Data;
 
-namespace PersonagemApi.Data
+namespace CharacterApi.Data
 {
-    public class ConexaoBanco
+    public class DatabaseConnection
     {
         private readonly string _connectionString;
 
-        #region conexão
+        #region connection
 
-        public ConexaoBanco(IConfiguration configuration)
+        public DatabaseConnection(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("Unimed_Sorocaba")!;
         }

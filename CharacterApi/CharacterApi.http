@@ -1,0 +1,33 @@
+@CharacterApi_HostAddress = http://localhost:5113
+
+### get all characters
+GET {{CharacterApi_HostAddress}}/api/character/get-all
+Accept: application/json
+
+### search characters by filters
+GET {{CharacterApi_HostAddress}}/api/character/search?characterId=&classId=&characterName=
+Accept: application/json
+
+### create a character
+POST {{CharacterApi_HostAddress}}/api/character/create
+Content-Type: application/json
+
+{
+  "classId": 1,
+  "characterName": "Arya",
+  "level": "1"
+}
+
+### update a character
+PUT {{CharacterApi_HostAddress}}/api/character/update/1
+Content-Type: application/json
+
+{
+  "classId": 2,
+  "level": "5"
+}
+
+### delete a character
+DELETE {{CharacterApi_HostAddress}}/api/character/delete/1
+
+###
